@@ -18,7 +18,7 @@ F(\sigma, state) &= 0 \quad \text{(algebraic constraint, yield surface)}
 \end{aligned}
 $$
 
-The two equations above present the constitutive integration as a constrained dynamical system.  
+The two equations above present the constitutive integration as a strain-driven constrained dynamical system.  
 The detailed interpretation and expanded form are provided below.  
 
 Given the current stress and state variables:  
