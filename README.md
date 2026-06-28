@@ -140,7 +140,7 @@ $$
 
 | Group | Purpose | Fixed Parameters | Compared Values |
 |:------:|---------|------------------|----------------|
-| 1 | Sensitivity to strain increment size (convergence and stability) | `p₀* = 200kPa`,<br> `SSTOL = 1e-5` | `Δε₃₃ = 1e-4, 1e-3, 1e-2，1e-1` |
+| 1 | Sensitivity to integration step size (convergence and stability) | `p₀* = 200kPa`,<br> `SSTOL = 1e-5` | `Δε₃₃ = 1e-4, 1e-3, 1e-2，1e-1` |
 | 2 | Sensitivity to substepping tolerance (SSTOL) | `p₀* = 200kPa`,<br> `Δε₃₃ = 1e-2` | `SSTOL = 1e-5, 1e-4, 1e-3` |
 | 3 | Influence of initial state variable p₀* (physical response) | `Δε₃₃ = 1e-4`,<br> `SSTOL = 1e-5` | `p₀* = 50, 100, 200kPa` |
 
@@ -148,7 +148,7 @@ All other parameters are kept at their default values and remain consistent with
 
 ---
 
-## 4. Stress Path and Yield Surface   
+## 4. Stress Path and Yield Surface (State Evolution Animation) 
 Stress path and yield surface evolution under a representative loading condition:
 ![animation](animation/stress_path.gif)
 
@@ -161,21 +161,22 @@ The stress path appears close to the initial yield surface, because the yield su
 ---
   
 ## 5.	Numerical Experiment Results
-### 5.1 Sensitivity to strain increment size 
-$\Delta \varepsilon_{33}=10^{-4}, 10^{-3}, 10^{-2}$
+### 5.1 Sensitivity to Integration Step Size (Strain Increment)
+Applied strain increment: $\Delta \varepsilon_{33}=10^{-4}, 10^{-3}, 10^{-2}$
 ![strain increment size](experiments/01_step_size_sensitivity.png)
+**In this project, *Efficiency* shown in the UI is defined as the ratio of accepted substeps to total substeps.**
 
 
 $\Delta \varepsilon_{33}=10^{-1}$
 ![strain increment size](experiments/01_step_size_failure.png)
 
-- The simulated curves obtained with different strain increment sizes almost overlap, indicating that the integration algorithm is robust with respect to the strain increment size.
+- The simulated curves obtained with different step sizes (strain increment size) almost overlap, indicating that the integration algorithm is robust to the choice of step size.
 
-- Larger strain increment size result in shorter runtime, since they significantly reduce the number of strain increments.
+- Larger step sizes result in shorter runtimes because they significantly reduce the total number of integration steps (strain increments).
 
-- Larger strain increment size lead to fewer rejected substeps, resulting in higher efficiency.
+- Larger step sizes lead to fewer rejected substeps, resulting in higher efficiency.
 
-- However, when the strain increment becomes excessively large (e.g., 1e-1), the adaptive substepping fails within the allowed substep attempts, indicating a practical limit for the global strain increment.
+- However, when the step size becomes excessively large (e.g., 1e-1), the adaptive substepping fails within the allowed substep attempts, indicating a practical limit for the global step size.
 
 ### 5.2 Sensitivity to substepping tolerance (SSTOL)
 $SSTOL=10^{-5}, 10^{-4}, 10^{-3}$
@@ -189,7 +190,7 @@ $SSTOL=10^{-5}, 10^{-4}, 10^{-3}$
 - Moderate tolerance values (e.g., 1e-4 and 1e-3) provide a good balance between computational efficiency and accuracy.
 
 
-### 5.3 Influence of internal state variable $p_0^{*}$ (physical response)
+### 5.3 Effect of Initial Internal State Variable p₀* on Model Response
 $p_0^*=200, 100, 50$ kPa
 ![p0*](experiments/03_hardening_parameter_effect.png)
 
@@ -202,7 +203,7 @@ The simulated responses are consistent with the expected behavior of the Barcelo
 
 ## 6. Demo video
 The demo illustrates numerical experiments with the BBM constitutive integration solver:
-- Oedometer test (one-dimensional compression with varying strain increments $\Delta \varepsilon_{33}$)
+- Oedometer test (one-dimensional compression with varying integration step size $\Delta \varepsilon_{33}$)
 - Different initial internal variable $p_0^{*}$  
 
 ▶ [Watch demo (YouTube)](https://youtu.be/jmR2P-bNt1A)  
