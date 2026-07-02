@@ -1,10 +1,11 @@
 # Numerical Experiment Platform for Nonlinear Elasto-Plastic Constitutive Integration (BBM)
+▶ [Watch demo (YouTube)](https://youtu.be/jmR2P-bNt1A) 
 
 ## 1. Problem Formulation
 
 Constitutive models define the stress–strain relationship of materials. Many engineering materials exhibit nonlinear and path-dependent stress-strain behavior, which is commonly modeled using elasto-plastic constitutive frameworks. In finite element analysis, this nonlinear response is computed through constitutive integration (stress update) algorithms driven by strain increments.
 
-- ODE Formulation of the Constitutive Integration  
+### 1.1 ODE Formulation of the Constitutive Integration  
 
 $$
 \begin{aligned}
@@ -96,42 +97,42 @@ $$
 F(\sigma, state)=0
 $$
 
-- Sources of Strong Nonlinearity in Elasto-Plastic Constitutive Integration
-   - State-dependent tangent stiffness
-   - Stiffness discontinuity at the yield surface
-   - Yield surface evolution driven by evolving internal variables
+### 1.2  Sources of Strong Nonlinearity in Elasto-Plastic Constitutive Integration
+- State-dependent tangent stiffness
+- Stiffness discontinuity at the yield surface
+- Yield surface evolution driven by evolving internal variables
 
-- Numerical Challenges
-   - Stress integration is sensitive to the size of strain increment
-   - Large strain increments may cause instability or yield-surface drift
+### 1.3 Numerical Challenges
+- Stress integration is sensitive to the size of strain increment
+ - Large strain increments may cause instability or yield-surface drift
 
-- Integration Strategy  
+### 1.4 Integration Strategy  
 
-   Modified Euler (Heun) method with adaptive error-controlled substepping for plastic integration
+Modified Euler (Heun) method with adaptive error-controlled substepping for plastic integration
 
-   The stress integration algorithm follows the procedure described in Potts & Zdravković (1999).
+The stress integration algorithm follows the procedure described in Potts & Zdravković (1999).
 
-- Selected Model: Barcelona Basic Model (BBM)
-   - Representative nonlinear elasto-plastic constitutive model for unsaturated soils
-   - Widely adopted in the modeling of unsaturated soil mechanics
-   - Suction-dependent hardening introduces additional state variables and derivative terms in the constitutive formulation, increasing the complexity of stress integration
-   - Typically requires user-defined implementation in commercial finite element method (FEM) software
-   - In this project, the model is implemented to validate a numerical integration algorithm for elasto-plastic constitutive models
-   - The modular codebase is structured to support extension to other elasto-plastic constitutive models
+### 1.5 Selected Model: Barcelona Basic Model (BBM)
+- Representative nonlinear elasto-plastic constitutive model for unsaturated soils
+- Widely adopted in the modeling of unsaturated soil mechanics
+- Suction-dependent hardening introduces additional state variables and derivative terms in the constitutive formulation, increasing the complexity of stress integration
+- Typically requires user-defined implementation in commercial finite element method (FEM) software
+- In this project, the model is implemented to validate a numerical integration algorithm for elasto-plastic constitutive models
+- The modular codebase is structured to support extension to other elasto-plastic constitutive models
 
    ---
 
 ## 2. Algorithm Implementation and Software Architecture
-- Overall Algorithm Flowchart
+### 2.1 Overall Algorithm Flowchart
 ![Algorithm diagram](diagrams/constitutive_integration_flowchart.png)
 
-- Flowchart of the Modified Euler Method with Adaptive Error-Controlled Substepping 
+### 2.2 Flowchart of the Modified Euler Method with Adaptive Error-Controlled Substepping 
 ![Modified Euler flow](diagrams/modified_euler_method_adaptive_substepping_flowchart.png)
 
-- Overall Function Call Graph
+### 2.3 Overall Function Call Graph
 ![Function call Graph](diagrams/function_call_graph.png)
 
-- Layered Architecture and File-Level Dependency Diagram
+### 2.4 Layered Architecture and File-Level Dependency Diagram
 ![File Dependency Diagram](diagrams/layered_architecture_file_dependencies.png)
 
 ---
