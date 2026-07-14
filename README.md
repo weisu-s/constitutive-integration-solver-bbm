@@ -1,5 +1,5 @@
-# Numerical Experiment Platform for Nonlinear Elasto-Plastic Constitutive Integration (BBM)
-▶ [Watch demo (YouTube)](https://youtu.be/jmR2P-bNt1A) 
+# Numerical Experiment Platform for Elasto-Plastic Constitutive Integration (Barcelona Basic Model)
+▶ [Watch Demo (YouTube)](https://youtu.be/jmR2P-bNt1A) 
 
 ## 1. Problem Formulation
 
@@ -15,7 +15,7 @@ $$
 state
 \end{bmatrix}
 &= f(\sigma, state) \quad \text{(nonlinear evolution equation)} \\
-F(\sigma, state) &= 0 \quad \text{(algebraic constraint, yield surface)}
+F(\sigma, state) &= 0 \quad \text{(yield surface acts as algebraic constraint)}
 \end{aligned}
 $$
 
@@ -113,9 +113,9 @@ Modified Euler (Heun) method with adaptive error-controlled substepping for plas
 The stress integration algorithm follows the procedure described in Potts & Zdravković (1999).
 
 ### 1.5 Selected Model: Barcelona Basic Model (BBM)
-- Representative nonlinear elasto-plastic constitutive model for unsaturated soils
+- Representative elasto-plastic constitutive model for unsaturated soils
 - Widely adopted in the modeling of unsaturated soil mechanics
-- Suction-dependent hardening introduces additional state variables and derivative terms in the constitutive formulation, increasing the complexity of stress integration
+- Suction-dependent hardening introduces additional state variables and derivative terms in the constitutive formulation, increasing the complexity of constitutive integration
 - Typically requires user-defined implementation in commercial finite element method (FEM) software
 - In this project, the model is implemented to validate a numerical integration algorithm for elasto-plastic constitutive models
 - The modular codebase is structured to support extension to other elasto-plastic constitutive models
@@ -179,7 +179,7 @@ $\Delta \varepsilon_{33}=10^{-1}$
 
 - However, when the step size becomes excessively large (e.g., 1e-1), the adaptive substepping fails within the allowed substep attempts, indicating a practical limit for the global step size.
 
-### 5.2 Sensitivity to substepping tolerance (SSTOL)
+### 5.2 Sensitivity to Substepping Tolerance (SSTOL)
 $SSTOL=10^{-5}, 10^{-4}, 10^{-3}$
 ![SSTOL](experiments/02_sstol_sensitivity.png)
 
@@ -202,12 +202,12 @@ The simulated responses are consistent with the expected behavior of the Barcelo
 
 - A larger yield surface delays the onset of plastic deformation, so the stress state remains in the elastic domain for a longer portion of the loading process.
 
-## 6. Demo video
+## 6. Demo Video
 The demo illustrates numerical experiments with the BBM constitutive integration solver:
 - Oedometer test (one-dimensional compression with varying integration step size $\Delta \varepsilon_{33}$)
 - Different initial internal variable $p_0^{*}$  
 
-▶ [Watch demo (YouTube)](https://youtu.be/jmR2P-bNt1A)  
+▶ [Watch Demo (YouTube)](https://youtu.be/jmR2P-bNt1A)  
 
 ---
 
