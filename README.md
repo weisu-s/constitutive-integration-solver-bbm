@@ -1,4 +1,4 @@
-# Numerical Experiment Platform for Elasto-Plastic Constitutive Integration (Barcelona Basic Model)
+# Elasto-plastic Constitutive Integration and Numerical Experiment Platform (Barcelona Basic Model)
 ▶ [Watch Demo (YouTube)](https://youtu.be/jmR2P-bNt1A) 
 
 ## 1. Problem Formulation
@@ -97,7 +97,7 @@ $$
 F(\sigma, state)=0
 $$
 
-### 1.2  Sources of Strong Nonlinearity in Elasto-Plastic Constitutive Integration
+### 1.2  Sources of Strong Nonlinearity in Elasto-plastic Constitutive Integration
 - State-dependent tangent stiffness
 - Stiffness discontinuity at the yield surface
 - Yield surface evolution driven by evolving internal variables
@@ -108,9 +108,7 @@ $$
 
 ### 1.4 Integration Strategy  
 
-Modified Euler (Heun) method with adaptive error-controlled substepping for plastic integration
-
-The stress integration algorithm follows the procedure described in Potts & Zdravković (1999).
+Modified Euler (Heun's) method with adaptive error-controlled substepping for plastic integration, the algorithm follows the procedure described in Potts & Zdravković (1999).
 
 ### 1.5 Selected Model: Barcelona Basic Model (BBM)
 - Representative elasto-plastic constitutive model for unsaturated soils
