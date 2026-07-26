@@ -204,8 +204,8 @@ The simulated responses are consistent with the expected behavior of the Barcelo
 
 ## 6. Demo Video
 The demo illustrates numerical experiments with the BBM constitutive integration solver:
-- Oedometer test (one-dimensional compression with varying integration step size $\Delta \varepsilon_{33}$)
-- Oedometer test with different initial internal variable $p_0^{*}$  
+- Oedometer tests with varying integration step size $\Delta \varepsilon_{33}$ (one-dimensional compression) 
+- Oedometer tests with different initial internal variable $p_0^{*}$  
 
 ▶ [Watch Demo (YouTube)](https://youtu.be/jmR2P-bNt1A)  
 
