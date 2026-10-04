@@ -3,7 +3,7 @@
 
 ## 1. Problem Formulation
 
-Constitutive models define the stress–strain relationship of materials. Many engineering materials exhibit nonlinear and path-dependent stress-strain behavior, which is commonly modeled using elasto-plastic constitutive frameworks. In finite element analysis, this nonlinear response is computed through constitutive integration (stress update) algorithms driven by strain increments.
+Constitutive models define the stress–strain relationship of materials. When loaded beyond the elastic range, the deformation of many engineering materials cannot be fully recovered after unloading. This irreversible and history-dependent stress-strain behavior is commonly modeled using elasto-plastic constitutive frameworks. In finite element analysis, this nonlinear response is computed through constitutive integration (stress update) algorithms driven by strain increments.
 
 ### 1.1 ODE Formulation of the Constitutive Integration  
 
@@ -99,12 +99,12 @@ $$
 
 ### 1.2  Sources of Strong Nonlinearity in Elasto-plastic Constitutive Integration
 - State-dependent tangent stiffness
-- Stiffness discontinuity at the yield surface between the elastic and plastic regimes
-- Yield surface evolution driven by evolving internal variables
+- Change in tangent stiffness at yielding between elastic and plastic regimes
+- Evolution of the yield surface driven by internal variables
 
 ### 1.3 Numerical Challenges
-- Stress integration is sensitive to the size of strain increment
- - Large strain increment may cause instability or yield-surface drift
+- Explicit stress integration is sensitive to the size of strain increment
+- Large strain increments can lead to significant integration errors or yield-surface drift
 
 ### 1.4 Integration Strategy  
 
@@ -113,11 +113,9 @@ $$
 The algorithm follows the procedure described in Potts & Zdravković (1999).
 
 ### 1.5 Selected Model: Barcelona Basic Model (BBM)
-- Representative elasto-plastic constitutive model for unsaturated soils
-- Widely adopted in the modeling of unsaturated soil constitutive behavior
+- Representative elasto-plastic constitutive model for unsaturated soils and widely adopted in the modeling of unsaturated soil constitutive behavior
 - Suction-dependent hardening introduces additional state variables and derivative terms in the constitutive formulation, increasing the complexity of constitutive integration
 - Requires user-defined implementation in commercial finite element method (FEM) software
-- In this project, the model is implemented to validate a numerical integration algorithm for elasto-plastic constitutive models
 - The modular codebase is structured to support extension to other elasto-plastic constitutive models
 
    ---
