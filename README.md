@@ -20,7 +20,7 @@ F(\sigma, state) &= 0 \quad \text{(yield surface acts as algebraic constraint)}
 $$
 
 The two equations above present the constitutive integration as a strain-driven constrained dynamical system.  
-The detailed interpretation and expanded form are provided below.  
+The detailed interpretation and expanded form are given below.  
 
 Given the current stress and state variables:  
 
@@ -99,22 +99,24 @@ $$
 
 ### 1.2  Sources of Strong Nonlinearity in Elasto-plastic Constitutive Integration
 - State-dependent tangent stiffness
-- Stiffness discontinuity at the yield surface
+- Stiffness discontinuity at the yield surface between the elastic and plastic regimes
 - Yield surface evolution driven by evolving internal variables
 
 ### 1.3 Numerical Challenges
 - Stress integration is sensitive to the size of strain increment
- - Large strain increments may cause instability or yield-surface drift
+ - Large strain increment may cause instability or yield-surface drift
 
 ### 1.4 Integration Strategy  
 
-Modified Euler (Heun's) method with adaptive error-controlled substepping for plastic integration, the algorithm follows the procedure described in Potts & Zdravković (1999).
+- Modified Euler (Heun's) method with adaptive error-controlled substepping for plastic integration
+
+The algorithm follows the procedure described in Potts & Zdravković (1999).
 
 ### 1.5 Selected Model: Barcelona Basic Model (BBM)
 - Representative elasto-plastic constitutive model for unsaturated soils
-- Widely adopted in the modeling of unsaturated soil mechanics
+- Widely adopted in the modeling of unsaturated soil constitutive behavior
 - Suction-dependent hardening introduces additional state variables and derivative terms in the constitutive formulation, increasing the complexity of constitutive integration
-- Typically requires user-defined implementation in commercial finite element method (FEM) software
+- Requires user-defined implementation in commercial finite element method (FEM) software
 - In this project, the model is implemented to validate a numerical integration algorithm for elasto-plastic constitutive models
 - The modular codebase is structured to support extension to other elasto-plastic constitutive models
 
@@ -151,11 +153,11 @@ All other parameters are kept at their default values and remain consistent with
 Stress path and yield surface evolution under a representative loading condition:
 ![animation](animation/stress_path.gif)
 
-The simulated stress path is physically consistent with the expected elasto–plastic behavior:  
+The simulated stress path is physically consistent with the expected elasto-plastic behavior:  
 - Initially elastic: stress state evolves inside the initial yield surface ($F<0$).
 - At yielding: stress state remains on the evolving yield surface ($dF = 0$).  
-The stress path appears close to the initial yield surface, because the yield surface changes only slightly at this stage,
-- Hardening stage: yield surface expands (internal variable $p_0{*}$ increase), and the stress path follows a relative stable direction governed by the plastic flow rule.
+The stress path appears close to the initial yield surface, because the yield surface changes only slightly at this stage.
+- Hardening stage: yield surface expands (internal variable $p_0^{*}$ increase), and the stress path follows a relative stable direction governed by the plastic flow rule. 
 
 ---
   
@@ -163,7 +165,7 @@ The stress path appears close to the initial yield surface, because the yield su
 ### 5.1 Sensitivity to Integration Step Size (Strain Increment)
 Applied strain increment: $\Delta \varepsilon_{33}=10^{-4}, 10^{-3}, 10^{-2}$
 ![strain increment size](experiments/01_step_size_sensitivity.png)
-**In this project, *Efficiency* shown in the UI is defined as the ratio of accepted substeps to total substeps.**
+**In this project, *Efficiency* shown in the Graphical User Interface is defined as the ratio of accepted substeps to total substeps.**
 
 
 $\Delta \varepsilon_{33}=10^{-1}$
@@ -196,14 +198,14 @@ $p_0^*=200, 100, 50$ kPa
 
 The simulated responses are consistent with the expected behavior of the Barcelona Basic Model (BBM):
 
-- Increasing $p_0^{*}$ enlarges the yield surface in the $p–q$ stress space, leading to higher peak stress.
+- Increasing $p_0^{*}$ enlarges the yield surface in the $p-q$ stress space, leading to higher peak stress.
 
 - A larger yield surface delays the onset of plastic deformation, so the stress state remains in the elastic domain for a longer portion of the loading process.
 
 ## 6. Demo Video
 The demo illustrates numerical experiments with the BBM constitutive integration solver:
-- Oedometer test (one-dimensional compression with varying integration step size $\Delta \varepsilon_{33}$)
-- Different initial internal variable $p_0^{*}$  
+- Oedometer tests with varying integration step size $\Delta \varepsilon_{33}$ (one-dimensional compression) 
+- Oedometer tests with different initial internal variable $p_0^{*}$  
 
 ▶ [Watch Demo (YouTube)](https://youtu.be/jmR2P-bNt1A)  
 
