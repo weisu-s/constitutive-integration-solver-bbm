@@ -108,7 +108,7 @@ $$
 
 ### 1.4 Integration Strategy  
 
-- Modified Euler (Heun's) method with adaptive error-controlled substepping for plastic integration
+- Heun's (Modified Euler) method with adaptive error-controlled substepping for plastic integration
 
 The algorithm follows the procedure described in Potts & Zdravković (1999).
 
@@ -169,9 +169,9 @@ Applied strain increment: $\Delta \varepsilon_{33}=10^{-4}, 10^{-3}, 10^{-2}$
 $\Delta \varepsilon_{33}=10^{-1}$
 ![strain increment size](experiments/01_step_size_failure.png)
 
-- The simulated curves obtained with different step sizes (strain increment size) almost overlap, indicating that the integration algorithm is robust to the choice of step size.
+- The simulated curves obtained with different step sizes (strain increment size) almost overlap, demonstrating numerical convergence with respect to the strain increment size.
 
-- Larger step sizes result in shorter runtimes because they significantly reduce the total number of integration steps (strain increments).
+- Larger step sizes result in shorter runtimes because they significantly reduce the total number of strain increments and the associated overhead from elastic trial, loading/unloading checks, and elastic fraction calculation.
 
 - Larger step sizes lead to fewer rejected substeps, resulting in higher efficiency.
 
@@ -182,7 +182,7 @@ $SSTOL=10^{-5}, 10^{-4}, 10^{-3}$
 ![SSTOL](experiments/02_sstol_sensitivity.png)
 
 
-- The simulated curves obtained with SSTOL values of 1e-5, 1e-4 and 1e-3 almost overlap, indicating that the solution is insensitive to the substep tolerance within this range.
+- The simulated curves obtained with SSTOL values of 1e-5, 1e-4 and 1e-3 almost overlap, indicating convergence with respect to the substep tolerance within this range.
 
 - Using an excessively small tolerance (e.g., 1e-5) significantly increases the number of substeps and runtime without noticeable improvement in the computed response.
 
