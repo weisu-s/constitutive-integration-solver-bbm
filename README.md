@@ -102,17 +102,14 @@ $$
 - Change in tangent stiffness at yielding between elastic and plastic regimes
 - Evolution of the yield surface driven by internal variables
 
-### 1.3 Numerical Challenges
-- Explicit stress integration is sensitive to the size of strain increment
-- Large strain increments can lead to significant integration errors or yield-surface drift
 
-### 1.4 Integration Strategy  
+### 1.3 Integration Strategy  
 
 - Heun's (Modified Euler) method with adaptive error-controlled substepping for plastic integration
 
 The algorithm follows the procedure described in Potts & Zdravković (1999).
 
-### 1.5 Selected Model: Barcelona Basic Model (BBM)
+### 1.4 Selected Model: Barcelona Basic Model (BBM)
 - Representative elasto-plastic constitutive model for unsaturated soils and widely adopted in the modeling of unsaturated soil constitutive behavior
 - Suction-dependent hardening introduces additional state variables and derivative terms in the constitutive formulation, increasing the complexity of constitutive integration
 - Requires user-defined implementation in commercial finite element method (FEM) software
