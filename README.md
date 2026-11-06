@@ -1,5 +1,9 @@
 # Elasto-plastic Constitutive Integration and Numerical Experiment Platform (Barcelona Basic Model)
-▶ [Watch Demo (YouTube)](https://youtu.be/jmR2P-bNt1A) 
+
+
+![stress path animation](animation/stress_path.gif)
+
+![demo animation](demo/constitutive_integration_bbm_demo.gif)
 
 ## 1. Problem Formulation
 
@@ -136,9 +140,10 @@ The algorithm follows the procedure described in Potts & Zdravković (1999).
 
 | Group | Purpose | Fixed Parameters | Compared Values |
 |:------:|---------|------------------|----------------|
-| 1 | Sensitivity to integration step size (convergence and stability) | `p₀* = 200kPa`,<br> `SSTOL = 1e-5` | `Δε₃₃ = 1e-4, 1e-3, 1e-2，1e-1` |
-| 2 | Sensitivity to substepping tolerance (SSTOL) | `p₀* = 200kPa`,<br> `Δε₃₃ = 1e-2` | `SSTOL = 1e-5, 1e-4, 1e-3` |
-| 3 | Influence of initial state variable p₀* (physical response) | `Δε₃₃ = 1e-4`,<br> `SSTOL = 1e-5` | `p₀* = 50, 100, 200kPa` |
+| 1 | Sensitivity to integration step size (convergence and stability) | `p₀* = 200 kPa`,<br>`s = 100 kPa`,<br>`SSTOL = 1e-5` | `Δε₃₃ = 1e-4, 1e-3, 1e-2, 1e-1` |
+| 2 | Sensitivity to substepping tolerance (SSTOL) | `p₀* = 200 kPa`,<br>`s = 100 kPa`,<br>`Δε₃₃ = 1e-2` | `SSTOL = 1e-5, 1e-4, 1e-3` |
+| 3 | Influence of initial state variable p₀* (physical response) | `s = 100 kPa`,<br>`Δε₃₃ = 1e-4`,<br>`SSTOL = 1e-5` | `p₀* = 50, 100, 200 kPa` |
+| 4 | Influence of matric suction s (physical response) | `p₀* = 200 kPa`,<br>`Δε₃₃ = 1e-4`,<br>`SSTOL = 1e-5` | `s = 100, 200, 300 kPa` |
 
 All other parameters are kept at their default values and remain consistent within each group.
 
@@ -186,16 +191,33 @@ $SSTOL=10^{-5}, 10^{-4}, 10^{-3}$
 - Moderate tolerance values (e.g., 1e-4 and 1e-3) provide a good balance between computational efficiency and accuracy.
 
 
-### 5.3 Effect of Initial Internal State Variable p₀* on Model Response
+### 5.3 Effect of Initial Internal State Variable p₀* and Matric Suction s (Physical Consistency)
+
 $p_0^*=200, 100, 50$ kPa
 ![p0*](experiments/03_hardening_parameter_effect.png)
-
+$s=100, 200, 300$ kPa
+![s](experiments/4_effects_of_suction,s=100,200,300.png)
 
 The simulated responses are consistent with the expected behavior of the Barcelona Basic Model (BBM):
 
-- Increasing $p_0^{*}$ enlarges the yield surface in the $p-q$ stress space, leading to higher peak stress.
+- Increasing $p_0^{*}$ and $s$ enlarges the yield surface in the $p-q$ stress space, leading to higher peak stress.
 
 - A larger yield surface delays the onset of plastic deformation, so the stress state remains in the elastic domain for a longer portion of the loading process.
+
+### 5.4 Sanity Checks on Physical Behavior
+#### 5.4.1 Saturated Condition (matric suction s = 0)
+- At zero matric suction, the BBM reduces to the Modified Cam Clay (MCC) model.
+
+- A larger initial hardening parameter $p_0^*$ leads to yielding at a higher stress level, consistent with the expected behavior of the model.
+
+
+![pure wetting](experiments/saturated_soils_under_varying_hardening_parameter.png)
+
+#### 5.4.2 Pure Wetting Condition (Hydro-mechanical Coupling)
+A pure wetting path ($\Delta \varepsilon$ = 0, $\Delta s$ < 0) was used to check the matric suction-dependent elastic response of the BBM implementation.
+![pure wetting](experiments/pure_wetting.png)
+
+The increase in specific volume during wetting (decrease in suction) is consistent with the matric suction-dependent swelling behavior predicted by the BBM model.
 
 ## 6. Demo Video
 The demo illustrates numerical experiments with the BBM constitutive integration solver:
