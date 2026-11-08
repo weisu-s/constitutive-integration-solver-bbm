@@ -191,7 +191,7 @@ $SSTOL=10^{-5}, 10^{-4}, 10^{-3}$
 - Moderate tolerance values (e.g., 1e-4 and 1e-3) provide a good balance between computational efficiency and accuracy.
 
 
-### 5.3 Effect of Initial Internal State Variable p₀* and Matric Suction s (Physical Consistency)
+### 5.3 Effects of Initial Internal State Variable p₀* and Matric Suction s (Physical Consistency)
 
 $p_0^*=200, 100, 50$ kPa
 ![p0*](experiments/03_hardening_parameter_effect.png)
